@@ -1,0 +1,10 @@
+{
+    "warehouse": "bigquery",
+    "defaultSchema": "dataform",
+    "assertionSchema": "dataform_assertions",
+    "defaultDatabase": "numeric-elixir-426915-f8",
+    "defaultLocation": "US",
+    "vars": {
+        "gcs_uri": "gs://dataform-demo-0626/sales_data.csv"
+    }
+}

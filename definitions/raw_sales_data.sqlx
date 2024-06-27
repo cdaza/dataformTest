@@ -1,0 +1,36 @@
+config {
+  type: "operations"
+}
+
+-- Create or replace the raw_sales_data table in BigQuery
+CREATE OR REPLACE TABLE `dataform_demo.raw_sales_data` (
+  product_id STRING,
+  customer_id STRING,
+  date DATE,
+  price FLOAT64,
+  quantity INT64
+)
+OPTIONS (
+  description = "This dataset contains raw sales data, capturing information about products sold, customers, transaction dates, and prices."
+);
+
+-- Load data from CSV files into the raw_sales_data table, skipping the header row
+LOAD DATA OVERWRITE
+  `dataform_demo.raw_sales_data` ( 
+    product_id STRING,
+    customer_id STRING,
+    date DATE,
+    price FLOAT64,
+    quantity INT64
+  )
+FROM FILES ( 
+    format = 'CSV',
+    skip_leading_rows = 1,  -- Skip the first row which contains headers
+    uris = ["${dataform.projectConfig.vars.gcs_uri}"]
+);
+
+-- Select data to verify load (or for subsequent transformation steps)
+SELECT
+  *
+FROM
+  `dataform_demo.raw_sales_data`;
