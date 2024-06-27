@@ -4,6 +4,10 @@
     "assertionSchema": "dataform_assertions",
     "defaultDatabase": "numeric-elixir-426915-f8",
     "defaultLocation": "US",
+    "git": {
+      "remote": "https://github.com/cdaza/dataformTest.git",
+      "branch": "main"
+    },
     "vars": {
         "gcs_uri": "gs://dataform-demo-0626/sales_data.csv"
     }

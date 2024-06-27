@@ -4,25 +4,24 @@ config {
 
 -- Create or replace the transformed_sales_data table in BigQuery
 CREATE OR REPLACE TABLE `dataform_demo.transformed_sales_data` (
-  product_id STRING,
-  customer_id STRING,
-  transaction_date DATE,
-  sale_price FLOAT64,
-  quantity INT64,
-  total_sales FLOAT64
+  product_id STRING OPTIONS(description="Unique identifier for the product"),
+  customer_id STRING OPTIONS(description="Unique identifier for the customer"),
+  transaction_date DATE OPTIONS(description="Date of the transaction"),
+  sale_price FLOAT64 OPTIONS(description="Price of the product at the time of sale"),
+  quantity INT64 OPTIONS(description="Quantity of products sold"),
+  total_sales FLOAT64 OPTIONS(description="Total sales amount calculated as quantity * sale_price")
 )
 OPTIONS (
   description = "This dataset contains transformed sales data, derived from the raw sales data. It includes cleaned and processed information suitable for analysis, reporting, and decision-making purposes."
 );
-
 
 -- Transformation to clean and process raw_sales_data into transformed_sales_data
 CREATE OR REPLACE TABLE `dataform_demo.transformed_sales_data` AS
 SELECT
   product_id,
   customer_id,
-  date,
-  price,
+  date AS transaction_date,  -- Renaming date to transaction_date
+  price AS sale_price,       -- Renaming price to sale_price
   quantity,
   price * quantity AS total_sales  -- Calculating total sales amount
 FROM

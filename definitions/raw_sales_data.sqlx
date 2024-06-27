@@ -4,14 +4,14 @@ config {
 
 -- Create or replace the raw_sales_data table in BigQuery
 CREATE OR REPLACE TABLE `dataform_demo.raw_sales_data` (
-  product_id STRING,
-  customer_id STRING,
-  date DATE,
-  price FLOAT64,
-  quantity INT64
+  product_id STRING OPTIONS(description="Unique identifier for the product"),
+  customer_id STRING OPTIONS(description="Unique identifier for the customer"),
+  date DATE OPTIONS(description="Date of the transaction"),
+  price FLOAT64 OPTIONS(description="Price of the product at the time of sale"),
+  quantity INT64 OPTIONS(description="Quantity of products sold")
 )
 OPTIONS (
-  description = "This dataset contains raw sales data, capturing information about products sold, customers, transaction dates, and prices."
+  description = "This dataset contains raw sales data, capturing information about products sold, customers, transaction dates, prices, and quantities."
 );
 
 -- Load data from CSV files into the raw_sales_data table, skipping the header row
